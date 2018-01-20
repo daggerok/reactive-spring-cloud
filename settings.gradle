@@ -1,0 +1,2 @@
+rootProject.name = "reactive-spring-cloud"
+include "gateway"

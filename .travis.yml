@@ -1,0 +1,35 @@
+sudo: required
+group: travis_lts
+
+env:
+  global:
+    TERM=dumb
+
+language: java
+jdk:
+- openjdk8
+- oraclejdk8
+
+install: true
+before_install:
+- source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+- stop_any 5432 5672 27017 8080
+
+script:
+# gradle
+- bash gradlew
+- java -jar gateway/build/libs/*.jar &
+- wait_for 8080
+- sleep 3
+- stop_any 8080
+# maven
+- bash mvnw
+- java -jar gateway/target/*.jar &
+- wait_for 8080
+- sleep 3
+- stop_any 8080
+
+cache:
+  directories:
+  - $HOME/.m2
+  - $HOME/.gradle
