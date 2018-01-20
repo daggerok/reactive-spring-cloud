@@ -25,6 +25,8 @@ script:
 - wait_for 8080
 - http :8080/get
 - http :8080
+- http :8080/headers
+- http :8080/headers Host:my.magic-fake.host
 - stop_any 8080
 # maven
 - bash mvnw package -DskipTests
@@ -32,6 +34,8 @@ script:
 - wait_for 8080
 - http :8080
 - http :8080/get
+- http :8080/headers
+- http :8080/headers Host:my.magic.fake.host
 - stop_any 8080
 
 cache:

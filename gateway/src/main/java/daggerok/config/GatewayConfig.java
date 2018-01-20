@@ -35,6 +35,10 @@ public class GatewayConfig {
                      .addRequestHeader("X-Spring-Cloud-Gateway", "Hell-Yeah!")
                      .uri("http://httpbin.org:80")) // but not .uri("http://httpbin.org:80/"))
 
+        .route(r -> r.host("my.**.host")
+                     .addRequestHeader("Ololo", "Trololo")
+                     .uri("http://httpbin.org:80"))
+
         .build()
         ;
   }
