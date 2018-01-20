@@ -12,21 +12,24 @@ jdk:
 
 install: true
 before_install:
+- sudo apt update -y || true
+- sudo apt install -y python-pip
+- sudo pip install httpie
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 - stop_any 5432 5672 27017 8080
 
 script:
 # gradle
-- bash gradlew
+- bash gradlew build -x test
 - java -jar gateway/build/libs/*.jar &
 - wait_for 8080
-- sleep 3
+- http :8080/get
 - stop_any 8080
 # maven
-- bash mvnw
+- bash mvnw package -DskipTests
 - java -jar gateway/target/*.jar &
 - wait_for 8080
-- sleep 3
+- http :8080/get
 - stop_any 8080
 
 cache:

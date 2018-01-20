@@ -6,6 +6,8 @@ This repository contains new reactive spring cloud examples.
 
 Currently in progress....
 
+.gateway looks for set of RouteLocator (see gatewat config)
+
 .build and run
 ----
 # gradle
@@ -15,6 +17,34 @@ java -jar gateway/build/libs/*.jar
 # maven
 bash ./mvnw
 java -jar gateway/target/*.jar
+
+# test /get gateway path route
+http :8080/get                                                                                                  08:43:32
+HTTP/1.1 200 OK
+Access-Control-Allow-Credentials: true
+Access-Control-Allow-Origin: *
+Connection: keep-alive
+Content-Length: 302
+Content-Type: application/json
+Date: Sat, 20 Jan 2018 06:43:39 GMT
+Server: meinheld/0.6.1
+Via: 1.1 vegur
+X-Powered-By: Flask
+X-Processed-Time: 0.000678062438965
+
+{
+    "args": {},
+    "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip, deflate",
+        "Connection": "close",
+        "Host": "httpbin.org",
+        "User-Agent": "HTTPie/0.9.9",
+        "X-Spring-Cloud-Gateway": "Is-F*cking-Awesome!"
+    },
+    "origin": "195.230.115.34",
+    "url": "http://httpbin.org/get"
+}
 ----
 
 links:
