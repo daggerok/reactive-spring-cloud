@@ -47,6 +47,14 @@ public class GatewayConfig {
                      .addRequestHeader("Boo", "O.o")
                      .uri("http://httpbin.org:80"))
 
+        /* http://127.0.0.1:8080/local/get Host:boo.rewrite.org -> http://httpbin.org:80/get */
+        .route(r -> r.host("*.set.path.org")
+                     .and()
+                     .path("/ololo/{segment}") // like spring-mvc path mapping
+                     .setPath("/{segment}") // {segment} , but not ${segment} !
+                     .addRequestHeader("Set", "Me!")
+                     .uri("http://httpbin.org:80"))
+
         .build()
         ;
   }
