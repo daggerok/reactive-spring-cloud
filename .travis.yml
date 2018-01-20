@@ -20,7 +20,7 @@ before_install:
 
 script:
 # gradle
-- bash gradlew build -x test
+- bash gradlew build
 - java -jar gateway/build/libs/*.jar &
 - wait_for 8080
 - http :8080/get
@@ -29,7 +29,7 @@ script:
 - http :8080/headers Host:my.magic-fake.host
 - stop_any 8080
 # maven
-- bash mvnw package -DskipTests
+- bash mvnw package
 - java -jar gateway/target/*.jar &
 - wait_for 8080
 - http :8080
