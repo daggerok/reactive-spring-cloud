@@ -1,24 +1,24 @@
-sudo: required
-group: travis_lts
-
 env:
   global:
     TERM=dumb
 
 language: java
-jdk:
-- openjdk8
-- oraclejdk8
+jdk: oraclejdk8
+
+addons:
+  apt:
+    update: true
+    package:
+    - python-pip
 
 install: true
 before_install:
-- sudo apt update -y || true
-- sudo apt install -y python-pip
 - sudo pip install httpie
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 - stop_any 5432 5672 27017 8080
 
 script:
+
 # gradle
 - bash gradlew build
 - java -jar gateway/build/libs/*.jar &
@@ -30,6 +30,7 @@ script:
 - http :8080/local/get Host:who-hoo.rewrite.org
 - http :8080/ololo/get Host:www.set.path.org
 - stop_any 8080
+
 # maven
 - bash mvnw package
 - java -jar gateway/target/*.jar &
