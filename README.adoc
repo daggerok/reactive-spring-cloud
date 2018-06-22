@@ -9,6 +9,7 @@ Currently in progress....
 .gateway looks for set of RouteLocator (see gatewat config)
 
 .build and run
+[source,bash]
 ----
 # gradle
 bash ./gradlew
@@ -17,8 +18,11 @@ java -jar gateway/build/libs/*.jar
 # maven
 bash ./mvnw
 java -jar gateway/target/*.jar
+----
 
-# test /get gateway path route
+.test /get gateway path route
+[source,bash]
+----
 http :8080/get                                                                                                  08:43:32
 HTTP/1.1 200 OK
 Access-Control-Allow-Credentials: true
@@ -31,7 +35,11 @@ Server: meinheld/0.6.1
 Via: 1.1 vegur
 X-Powered-By: Flask
 X-Processed-Time: 0.000678062438965
+----
 
+.output
+[source,json]
+----
 {
     "args": {},
     "headers": {
